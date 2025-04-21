@@ -1,24 +1,43 @@
 import random
-from time import sleep
+import customtkinter as ctk
 
-senha = []
+ctk.set_appearance_mode("dark")
 
-Int = '0123456789'
-char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+def gerar_senha():
+    senha = []
+    
+    Int = '0123456789'
+    char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-for i in range(0,4):
-    senha.append(random.choice(Int))
+    for i in range(0,4):
+        senha.append(random.choice(Int))
 
-for c in range(0,4):
-    senha.append(random.choice(char))
+    for c in range(0,4):
+        senha.append(random.choice(char))
 
-senha = ''.join(random.sample(senha, len(senha)))
+    senha = ''.join(random.sample(senha, len(senha)))
+  
+    Resultado_senha.configure(text = senha, text_color = '#F0FFFF')
 
-sleep(.5)
+app = ctk.CTk()
+app.title("Gerador de Senhas")
+app.geometry("300x300")
 
-print('-'*10,f'\033[32m{senha}\033[0m','-'*10)
+campo_gerador = ctk.CTkLabel(app, text="⬇⬇ Senha ⬇⬇ ", text_color = '#7B68EE', font = ('Impact', 20))
+campo_gerador.pack(pady = (70,20))
 
-# Gerador de senhas com 4 números e 4 letras
-# O código gera uma senha aleatória composta por 4 números e 4 letras, misturando-as.
-# A senha é exibida na tela com uma pausa de 0,5 segundos antes da exibição.
-# O código utiliza as bibliotecas random e time para gerar a senha e controlar o tempo de exibição.
+container_senha = ctk.CTkFrame(app, width = 200, height = 50, corner_radius = 10)
+container_senha.pack(pady = (10,20,), padx = 50, fill = "both", expand = False)
+
+Resultado_senha = ctk.CTkLabel(container_senha, text = '' ,font = ('Impact', 18))
+Resultado_senha.pack()
+
+botao_gerador = ctk.CTkButton(app, text="Gerar Senha",font = ('Arial', 15) ,command = gerar_senha, fg_color = '#7B68EE',hover_color = '#4B0082', text_color = 'white')
+botao_gerador.pack()
+
+app.mainloop()
+
+# Esse é um gerador de senhas com interface gráfica feito com a biblioteca customtkinter.
+# O código gera uma senha aleatória composta por 4 números e 4 letras maiúsculas, misturadas aleatoriamente.
+# A senha gerada é exibida em um rótulo na interface gráfica. O botão "Gerar Senha" chama a função que gera a senha e atualiza o rótulo com a nova senha.
+# A interface é estilizada com cores e fontes personalizadas para melhorar a aparência.
